@@ -5,21 +5,25 @@ let data = [];
 async function getData() {
   
     const response = await fetch("http://localhost:5678/api/works");  
-    const data = await response.json();  
+    data = await response.json();  
     console.log(data);
+    afficherProjets(data)
+    creerFiltres()
+  }
 
+// Fonction pour afficher les projets
 
-let ConteneurFig = document.querySelector(".gallery");
+function afficherProjets(projets) {
+  let ConteneurFig = document.querySelector(".gallery");
 
-// Boucle pour enlever le code HTML
-
-while (ConteneurFig.firstChild) {
-  ConteneurFig.removeChild(ConteneurFig.firstChild);
+  // Boucle pour enlever le code HTML
+  while (ConteneurFig.firstChild) {
+    ConteneurFig.removeChild(ConteneurFig.firstChild);
 }
 
 // Boucle pour intégrer les nouvelles balises de chaques projets
 
-data.forEach(project => {
+projets.forEach(project => {
 
   let ContenuFig = document.createElement("figure");
 
@@ -35,10 +39,10 @@ data.forEach(project => {
   ContenuFig.appendChild(ContenuFigcap);
 });
 }
-getData()
 
 // Filtres
 
+function creerFiltres() {
 let Projet = document.getElementById("portfolio");
 let filtres = document.createElement("nav");
 let secondChild = Projet.children[1];
@@ -60,10 +64,27 @@ filtres.appendChild(BtnObj);
 filtres.appendChild(BtnApp);
 filtres.appendChild(BtnHetR);
 
-BtnObj.addEventListener("click", function(){
-  const filtresObj = data.filter(project => project.category.name === "Objets")
-  console.log(data)
-})
+BtnTous.addEventListener("click", function() {
+  afficherProjets(data);
+});
+
+BtnObj.addEventListener("click", function() {
+  const filtresObj = data.filter(project => project.category.name === "Objets");
+  afficherProjets(filtresObj);
+});
+
+BtnApp.addEventListener("click", function() {
+  const filtresApp = data.filter(project => project.category.name === "Appartements");
+  afficherProjets(filtresApp); 
+});
+
+BtnHetR.addEventListener("click", function() {
+  const filtresHetR = data.filter(project => project.category.name === "Hotels & restaurants");
+  afficherProjets(filtresHetR);  
+});
+}
+
+getData();
 
 
 
