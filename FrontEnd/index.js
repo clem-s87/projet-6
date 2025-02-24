@@ -1,3 +1,7 @@
+let data = []; 
+
+// Fonction appel API
+
 async function getData() {
   
     const response = await fetch("http://localhost:5678/api/works");  
@@ -7,6 +11,14 @@ async function getData() {
 
 let ConteneurFig = document.querySelector(".gallery");
 
+// Boucle pour enlever le code HTML
+
+while (ConteneurFig.firstChild) {
+  ConteneurFig.removeChild(ConteneurFig.firstChild);
+}
+
+// Boucle pour intégrer les nouvelles balises de chaques projets
+
 data.forEach(project => {
 
   let ContenuFig = document.createElement("figure");
@@ -15,18 +27,46 @@ data.forEach(project => {
   ContenuImg.src = project.imageUrl;
   ContenuImg.alt = project.title;
 
-  let ContenuFigcap = document.createElement("figcaption")
-  ContenuFigcap.innerText = project.title
+  let ContenuFigcap = document.createElement("figcaption");
+  ContenuFigcap.innerText = project.title;
 
   ConteneurFig.appendChild(ContenuFig);
   ContenuFig.appendChild(ContenuImg);
   ContenuFig.appendChild(ContenuFigcap);
 });
-
 }
-
-
 getData()
+
+// Filtres
+
+let Projet = document.getElementById("portfolio");
+let filtres = document.createElement("nav");
+let secondChild = Projet.children[1];
+
+Projet.insertBefore(filtres, secondChild);
+
+let BtnTous = document.createElement("button");
+let BtnObj = document.createElement("button");
+let BtnApp = document.createElement("button");
+let BtnHetR = document.createElement("button");
+
+BtnTous.textContent = "Tous"
+BtnObj.textContent = "Objets"
+BtnApp.textContent = "Appartements"
+BtnHetR.textContent = "Hôtels & restaurants"
+
+filtres.appendChild(BtnTous);
+filtres.appendChild(BtnObj);
+filtres.appendChild(BtnApp);
+filtres.appendChild(BtnHetR);
+
+BtnObj.addEventListener("click", function(){
+  const filtresObj = data.filter(project => project.category.name === "Objets")
+  console.log(data)
+})
+
+
+
 
 
 
