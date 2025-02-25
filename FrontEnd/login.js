@@ -29,7 +29,7 @@ const token = data.token;
 
 localStorage.setItem("authtoken", token);
 
-window.location.href = "http://127.0.0.1:5500/FrontEnd/index.html"; 
+window.location.href = "./index.html"; 
 } catch (error) {
 
   alert('Identifiants incorrects ou erreur de serveur. Essayez encore.');
