@@ -84,6 +84,28 @@ BtnHetR.addEventListener("click", function() {
 });
 }
 
+// Passage affichage admin utilisateur
+
+const token = localStorage.getItem("authtoken");
+console.log(token)
+
+if (token) {
+  const AdminElements = document.querySelectorAll(".admin-item");
+  AdminElements.forEach(element => {
+    element.style.display = "flex";
+    const BtnLogout = document.querySelector(".Btnlog");
+    BtnLogout.innerText = "logout";
+  });
+}
+else {
+  const AdminElements = document.querySelectorAll(".admin-item");
+  AdminElements.forEach(element => {
+    element.style.display = "none";
+  });
+}
+
+
+
 getData();
 
 
