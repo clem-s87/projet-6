@@ -42,11 +42,12 @@ projets.forEach(project => {
 
 // Filtres
 
+let filtres = document.createElement("nav");
+
 function creerFiltres() {
 let Projet = document.getElementById("portfolio");
-let filtres = document.createElement("nav");
-let secondChild = Projet.children[1];
 
+let secondChild = Projet.children[1];
 Projet.insertBefore(filtres, secondChild);
 
 let BtnTous = document.createElement("button");
@@ -87,7 +88,6 @@ BtnHetR.addEventListener("click", function() {
 // Passage affichage admin utilisateur
 
 const token = localStorage.getItem("authtoken");
-console.log(token)
 
 if (token) {
   const AdminElements = document.querySelectorAll(".admin-item");
@@ -95,26 +95,57 @@ if (token) {
     element.style.display = "flex";
     const BtnLogout = document.querySelector(".Btnlog");
     BtnLogout.innerText = "logout";
-  });
+  BtnLogout.addEventListener("click", () =>{
+    localStorage.removeItem("authtoken");
+    BtnLogout.href = "./index.html"});
+    });
+    filtres.style.display = "none";
 }
+
 else {
   const AdminElements = document.querySelectorAll(".admin-item");
   AdminElements.forEach(element => {
     element.style.display = "none";
-  });
+    });
 }
 
-//  Enlever le token du local storage lorsque l'utilisateur clique sur logout
+// Modale overlay
 
-if (BtnLogout = "logout") {
-  addEventListener ("click", function() {
-      localStorage.removeItem("authtoken")
-  });
-}
+const modale = document.querySelector(".modale");
+const overlay = document.querySelector(".overlay");
+const BtnModif = document.querySelector(".Btn-modif")
+const Btnexit = document.querySelector(".fa-xmark")
 
+BtnModif.addEventListener("click", () => {
+    modale.style.display = "block"
+    overlay.style.display = "block"
+})
+
+Btnexit.addEventListener("click", () => {
+    modale.style.display = "none"
+    overlay.style.display = "none"
+})
+
+  overlay.addEventListener("click", () => {
+    modale.style.display = "none"
+    overlay.style.display = "none"
+  })
+  
+async function  ProjetsMod () {
+    const response = await fetch("http://localhost:5678/api/works");
+    data = await response.json();    
+    console.log(data); 
+    Afficherpromod (data)
+ }
+
+ function Afficherpromod (projets) {
+  const Projetsmod = document.querySelector(".modale__body");
+ }
 
 
 getData();
+ProjetsMod ()
+
 
 
 

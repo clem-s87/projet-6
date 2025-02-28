@@ -308,9 +308,63 @@ span {
 	padding-top: 10px;
 }
 
-.Btn-modif {
+.Btn-modif button, .Btn-modif .fa-pen-to-square{
 	display: flex;
 	align-items: flex-start;
+	cursor: pointer;
 }
 
+/* Overlay et modale */
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.3);
+	display: none;
+}
+
+.modale {
+	position: fixed;
+	z-index: 1000;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 630px;
+	height: 688px;
+	background-color: white;
+	display: none;
+}
+
+.overlay__btn {
+	background-color: #1D6154;
+	color: white;
+	border-radius: 20px;
+	border: none;
+	font-size: 14px;
+	width: 237px;
+	height: 36px;
+	margin-top: 15px;
+}
+
+.modale__header {
+	font-size: 26px;
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+}
+
+.modale__footer {
+	display: flex;
+	justify-content: center;
+}
+
+.fa-xmark {
+	position: relative;
+	top: -35px;
+	left: 180px;
+	cursor: pointer;
+}
 
