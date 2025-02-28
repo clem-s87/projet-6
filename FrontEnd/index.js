@@ -104,6 +104,14 @@ else {
   });
 }
 
+//  Enlever le token du local storage lorsque l'utilisateur clique sur logout
+
+if (BtnLogout = "logout") {
+  addEventListener ("click", function() {
+      localStorage.removeItem("authtoken")
+  });
+}
+
 
 
 getData();
