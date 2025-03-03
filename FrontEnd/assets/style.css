@@ -336,6 +336,7 @@ span {
 	height: 688px;
 	background-color: white;
 	display: none;
+	border-radius: 10px;
 }
 
 .overlay__btn {
@@ -365,6 +366,43 @@ span {
 	position: relative;
 	top: -35px;
 	left: 180px;
+	cursor: pointer;
+}
+
+.modale__body {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	padding: 10px;
+	justify-content: flex-start;
+	padding-left: 100px;
+	padding-right: 100px;
+	padding-top: 60px;
+}
+
+.modale__body img {
+	width: 76px;
+	height: 102px;
+}
+
+/* Icone modale */
+
+.modale__icon {
+	color: white;
+	font-size: 10px;
+	
+}
+.modale__conteneuricon {
+	position: relative;
+    top: -100px;
+    right: -55px;
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 17px;
+	height: 17px;
+	border-radius: 2px;
 	cursor: pointer;
 }
 

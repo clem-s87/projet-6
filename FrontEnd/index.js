@@ -131,16 +131,39 @@ Btnexit.addEventListener("click", () => {
     overlay.style.display = "none"
   })
   
-async function  ProjetsMod () {
+// Appel API pour la modale
+
+  async function ProjetsMod() {
     const response = await fetch("http://localhost:5678/api/works");
     data = await response.json();    
     console.log(data); 
-    Afficherpromod (data)
- }
+    Afficherpromod(data);
+  }
+  
 
- function Afficherpromod (projets) {
-  const Projetsmod = document.querySelector(".modale__body");
- }
+  function Afficherpromod(projets) {
+    const Projetsmod = document.querySelector(".modale__body");
+  
+  
+    projets.forEach(project => {
+  
+      let ContenuImg = document.createElement("img");
+      ContenuImg.src = project.imageUrl;
+      // Ajout poubelle
+      let ConteneurImgIcon = document.createElement("div");
+      ConteneurImgIcon.classList.add("modale__imgeticon")
+      let ConteneurIcon = document.createElement("div");
+      ConteneurIcon.classList.add("modale__conteneuricon")
+      let Icon = document.createElement("i");
+      Icon.classList.add("fa-solid", "fa-trash-can", "modale__icon")
+
+      
+      Projetsmod.appendChild(ConteneurImgIcon);
+      ConteneurImgIcon.appendChild(ContenuImg);
+      ConteneurImgIcon.appendChild(ConteneurIcon);
+      ConteneurIcon.appendChild(Icon);
+    });
+  }
 
 
 getData();
