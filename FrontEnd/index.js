@@ -149,7 +149,10 @@ Btnexit.addEventListener("click", () => {
   
       let ContenuImg = document.createElement("img");
       ContenuImg.src = project.imageUrl;
-      // Ajout poubelle
+      console.log(projets)
+
+  // Ajout poubelle
+
       let ConteneurImgIcon = document.createElement("div");
       ConteneurImgIcon.classList.add("modale__imgeticon")
       let ConteneurIcon = document.createElement("div");
@@ -157,17 +160,35 @@ Btnexit.addEventListener("click", () => {
       let Icon = document.createElement("i");
       Icon.classList.add("fa-solid", "fa-trash-can", "modale__icon")
 
-      
       Projetsmod.appendChild(ConteneurImgIcon);
       ConteneurImgIcon.appendChild(ContenuImg);
       ConteneurImgIcon.appendChild(ConteneurIcon);
       ConteneurIcon.appendChild(Icon);
-    });
+
+//  Suppression projet modale
+
+      ConteneurIcon.dataset.id = project.id
+      ConteneurIcon.addEventListener("click", function() {
+      SupprimerProjets(project.id);
+      Icon.closest(".modale__imgeticon").remove();
+  })
+  });  
   }
 
+async function SupprimerProjets(id) {
+    const token = localStorage.getItem("authtoken");
+      const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+          method: "DELETE",
+          headers: {
+              "Accept": "*/*",
+              "Authorization": `Bearer ${token}`
+          }
+      });
+    }
 
 getData();
-ProjetsMod ()
+ProjetsMod ();
+
 
 
 
