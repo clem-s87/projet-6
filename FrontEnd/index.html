@@ -23,6 +23,42 @@
 			<button class="overlay__btn">Ajoutez une photo</button>
 		</div>
 	</div>
+	<div class="modale__ajout">
+		<div class="modale__ajout__header">
+			<h3>Ajout photo</h3>
+			<i class="fa-solid fa-xmark"></i>
+			<i class="fa-solid fa-arrow-left"></i>
+		</div>
+		<div class="modale__ajout__body">
+			<div class="modale__ajout__body__conteneur">
+					<i class="fa-regular fa-image"></i>
+				<label for="ajout-photo" class="btn-photo"> + Ajoutez une photo
+					<input type="file" id="ajout-photo" accept="image/*">
+				</label>
+				<p>jpg, png : 4 mo max</p>
+				<img src="" id="nouvelle-img" alt="Nouvelle photo">
+			</div>
+			<div>
+				<form>
+					<label for="titre-form">Titre <br><input type="text" id="titre-form" required></label>
+				</form>
+			</div>
+			<div>
+				<form>
+				<label for="categorie-form">Catégorie <br>
+					<select name="categorie-form" id="categorie-form" required>
+						<option value=""></option>
+						<option value="Objets"> Objets </option>
+						<option value="Appartement"> Appartements </option>
+						<option value="Hotels & restaurants"> Hotels & restaurants </option>
+					</select></label>
+				</form>
+			</div>
+		</div>
+		<div class="modale__ajout__footer">
+			<button class="btn-valider">Valider</button>
+		</div>
+	</div>
 	<div class="admin-item edition-bar">
 		<i class="fa-regular fa-pen-to-square"></i>
 		<p>Mode édition</p>

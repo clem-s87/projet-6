@@ -337,6 +337,8 @@ span {
 	background-color: white;
 	display: none;
 	border-radius: 10px;
+	flex-direction: column;
+	align-items: center;
 }
 
 .overlay__btn {
@@ -347,7 +349,8 @@ span {
 	font-size: 14px;
 	width: 237px;
 	height: 36px;
-	margin-top: 15px;
+	margin-top: 40px;
+	cursor: pointer;
 }
 
 .modale__header {
@@ -360,6 +363,8 @@ span {
 .modale__footer {
 	display: flex;
 	justify-content: center;
+	border-top: 1px solid gray;
+	width: 430px;
 }
 
 .fa-xmark {
@@ -378,6 +383,7 @@ span {
 	padding-left: 100px;
 	padding-right: 100px;
 	padding-top: 60px;
+	padding-bottom: 60px;
 }
 
 .modale__body img {
@@ -405,4 +411,126 @@ span {
 	border-radius: 2px;
 	cursor: pointer;
 }
+
+/* modale ajout */
+
+.modale__ajout {
+	position: fixed;
+	z-index: 1000;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 630px;
+	height: 688px;
+	background-color: white;
+	display: none;
+	border-radius: 10px;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+}
+
+.modale__ajout__header {
+	font-size: 26px;
+	display: flex;
+	justify-content: center;
+	margin-top: 50px;
+	padding-bottom: 20px;
+}
+
+.modale__ajout__footer {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid gray;
+    width: 420px;
+}
+
+.fa-arrow-left {
+	position: relative;
+    left: -370px;
+    top: -35px;
+	cursor: pointer;
+}
+
+.btn-valider {
+	background-color: gray;
+	color: white;
+	border-radius: 20px;
+	border: none;
+	font-size: 14px;
+	width: 237px;
+	height: 36px;
+	margin-top: 30px;
+	cursor: pointer;
+}
+
+#ajout-photo { 
+display: none;
+}
+
+.modale__ajout__body {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	gap: 30px;
+	align-items: center;
+	padding-bottom: 20px;
+
+}
+
+.modale__ajout__body__conteneur {
+	background-color: #E8F1F6;
+	width: 420px;
+	height: 169px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+}
+
+.btn-photo {
+	width: 173px;
+	height: 36px;
+	background-color: #CBD6DC;
+	color: #306685;
+	border: none;
+	border-radius: 20px;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.fa-image{
+	color: #B9C5CC;
+	font-size: 60px;
+	padding-top: 15px;
+}
+
+.modale__ajout__body__conteneur p {
+	font-size: 10px;
+}
+
+#titre-form {
+	border: none;
+    box-shadow: 0px 4px 14px 0px #00000017;
+    width: 420px;
+    height: 51px;
+    margin-top: 10px;
+}
+
+#categorie-form {
+	border: none;
+    box-shadow: 0px 4px 14px 0px #00000017;
+    width: 420px;
+    height: 51px;
+    margin-top: 10px;
+}
+
+#nouvelle-img{
+	width: 129px;
+    height: 193px;
+	display: none;
+}
+
 

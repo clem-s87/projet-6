@@ -114,22 +114,43 @@ else {
 const modale = document.querySelector(".modale");
 const overlay = document.querySelector(".overlay");
 const BtnModif = document.querySelector(".Btn-modif")
-const Btnexit = document.querySelector(".fa-xmark")
+const Btnexit = document.querySelectorAll(".fa-xmark")
+const BtnAjout = document.querySelector(".overlay__btn")
+const modaleAjout = document.querySelector(".modale__ajout")
+const Btnfleche = document.querySelector(".fa-arrow-left")
 
 BtnModif.addEventListener("click", () => {
-    modale.style.display = "block"
+    modale.style.display = "flex"
     overlay.style.display = "block"
 })
 
-Btnexit.addEventListener("click", () => {
-    modale.style.display = "none"
-    overlay.style.display = "none"
+Btnexit.forEach(btn => {
+  btn.addEventListener("click", () => {
+      Resetmodale ()
+      modale.style.display = "none"
+      overlay.style.display = "none"
+      modaleAjout.style.display = "none"
+  })
 })
 
-  overlay.addEventListener("click", () => {
+overlay.addEventListener("click", () => {
+    Resetmodale ()
     modale.style.display = "none"
     overlay.style.display = "none"
+    modaleAjout.style.display = "none"
   })
+
+BtnAjout.addEventListener("click", () => {
+    modale.style.display = "none"
+    modaleAjout.style.display = "flex"
+})
+
+Btnfleche.addEventListener("click", () => {
+  Resetmodale ()
+  modale.style.display = "flex"
+  overlay.style.display = "block"
+  modaleAjout.style.display = "none"
+})
   
 // Appel API pour la modale
 
@@ -167,7 +188,7 @@ Btnexit.addEventListener("click", () => {
 
 //  Suppression projet modale
 
-      ConteneurIcon.dataset.id = project.id
+      ConteneurIcon.dataset.id = project.id;
       ConteneurIcon.addEventListener("click", function() {
       SupprimerProjets(project.id);
       Icon.closest(".modale__imgeticon").remove();
@@ -185,6 +206,58 @@ async function SupprimerProjets(id) {
           }
       });
     }
+
+// Ajout projets
+
+const Pictoimg = document.querySelector(".fa-image");
+const Labelfile = document.querySelector(".btn-photo");
+const Textfile = document.querySelector("p");
+const Inputfile = document.querySelector("#ajout-photo");
+const Maxsize = 4*1024*1024;
+let NvelleImg = document.getElementById("nouvelle-img")
+
+Inputfile.addEventListener( "change", (event) => {
+  const file = event.target.files[0];
+  console.log(NvelleImg.src)
+
+
+if (file) {
+  if (file.size <= Maxsize) {
+    Pictoimg.style.display = "none";
+    Labelfile.style.display = "none";
+    Textfile.style.display = "none";
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      NvelleImg.src = e.target.result; 
+      NvelleImg.style.display = "block"; 
+    };
+
+    reader.readAsDataURL(file); 
+
+  } else {
+    alert("Le fichier est trop gros. La taille maximale est de 4 Mo.");
+  }
+}
+});
+
+function Resetmodale () {
+  NvelleImg.src = "";
+  NvelleImg.style.display = "none";
+
+  Pictoimg.style.display = "flex";
+  Labelfile.style.display = "flex";
+  Textfile.style.display = "flex";
+
+  Inputfile.value = "";
+}
+
+
+
+
+
+
+
+
 
 getData();
 ProjetsMod ();
