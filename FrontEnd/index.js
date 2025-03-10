@@ -1,4 +1,6 @@
-let data = []; 
+let data = [];
+let categories = [];
+
 
 // Fonction appel API
 
@@ -7,9 +9,15 @@ async function getData() {
     const response = await fetch("http://localhost:5678/api/works");  
     data = await response.json();  
     console.log(data);
-    afficherProjets(data)
-    creerFiltres()
+    afficherProjets(data);
+    creerFiltres();
   }
+
+async function getCategories() {
+  const response = await fetch("http://localhost:5678/api/categories");
+  categories = await response.json();
+  console.log(categories);
+}
 
 // Fonction pour afficher les projets
 
@@ -164,6 +172,11 @@ Btnfleche.addEventListener("click", () => {
 
   function Afficherpromod(projets) {
     const Projetsmod = document.querySelector(".modale__body");
+
+    while (Projetsmod.firstChild) {
+      Projetsmod.removeChild(Projetsmod.firstChild);
+    }
+  
   
   
     projets.forEach(project => {
@@ -205,7 +218,15 @@ async function SupprimerProjets(id) {
               "Authorization": `Bearer ${token}`
           }
       });
+      if (response.ok) {
+        // Mettre à jour les données après suppression
+        data = data.filter(project => project.id !== id);
+        afficherProjets(data)
+    } else {
+        console.error("Erreur lors de la suppression du projet");
     }
+}
+
 
 // Ajout projets
 
@@ -257,35 +278,42 @@ Form.addEventListener("submit", function (event) {
 
   const file = Inputfile.files[0];
   const titre = titreInput.value;
-  const categorie = categorieSelect.value;
+  const categorieName = categorieSelect.value;
 
-  if (!file || !titre || !categorie) {
+  if (!file || !titre || !categorieName) {
     alert("Veuillez remplir tous les champs (image, titre et catégorie).");
     return;
   }
 
-const Formdata = new FormData(Form);
-Formdata.append("imageUrl", file);
+  const categorie = categories.find(cat => cat.name === categorieName);
+  if (!categorie) {
+    alert("Catégorie non trouvée.");
+    return;
+  }
+
+const Formdata = new FormData();
+Formdata.append("image", file);
 Formdata.append("title", titre);
-Formdata.append("category", categorie);
+Formdata.append("category", categorie.id);
 
-console.log(Formdata)
 
-console.log(Formdata)
 fetch("http://localhost:5678/api/works", {
   method: "POST",
   body: Formdata,
   headers: {
-    Authorization: `Bearer ${token}`
+    "Authorization": `Bearer ${localStorage.getItem("authtoken")}`,
   }
 })
-  .then((response) => response.json()) // Parser la réponse JSON
-  .then((data) => {
-    console.log("Réponse de l'API : ", data);
+  .then((response) => response.json()) 
+  .then((newProject) => {
+    console.log("Réponse de l'API : ", newProject);
     alert("L'image a été envoyée avec succès !");
-    // Optionnel : réinitialiser le formulaire ou effectuer d'autres actions
-    Form.reset(); // Réinitialiser le formulaire
-    NvelleImg.style.display = "none"; // Masquer l'image
+    data.push(newProject);
+    Afficherpromod(data);
+    Resetmodale ();
+    Form.reset(); 
+    NvelleImg.style.display = "none"; 
+    afficherProjets(data);
   })
   .catch((error) => {
     
@@ -295,26 +323,6 @@ fetch("http://localhost:5678/api/works", {
 });
 
 
-
 getData();
-ProjetsMod ();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ProjetsMod();
+getCategories();
