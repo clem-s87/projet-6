@@ -215,11 +215,12 @@ const Textfile = document.querySelector("p");
 const Inputfile = document.querySelector("#ajout-photo");
 const Maxsize = 4*1024*1024;
 let NvelleImg = document.getElementById("nouvelle-img")
+const Form = document.getElementById("form-photo")
+titreInput = document.getElementById("titre-form")
+categorieSelect = document.getElementById("categorie-form")
 
 Inputfile.addEventListener( "change", (event) => {
   const file = event.target.files[0];
-  console.log(NvelleImg.src)
-
 
 if (file) {
   if (file.size <= Maxsize) {
@@ -251,11 +252,47 @@ function Resetmodale () {
   Inputfile.value = "";
 }
 
+Form.addEventListener("submit", function (event) {
+  event.preventDefault();
 
+  const file = Inputfile.files[0];
+  const titre = titreInput.value;
+  const categorie = categorieSelect.value;
 
+  if (!file || !titre || !categorie) {
+    alert("Veuillez remplir tous les champs (image, titre et catégorie).");
+    return;
+  }
 
+const Formdata = new FormData(Form);
+Formdata.append("imageUrl", file);
+Formdata.append("title", titre);
+Formdata.append("category", categorie);
 
+console.log(Formdata)
 
+console.log(Formdata)
+fetch("http://localhost:5678/api/works", {
+  method: "POST",
+  body: Formdata,
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+})
+  .then((response) => response.json()) // Parser la réponse JSON
+  .then((data) => {
+    console.log("Réponse de l'API : ", data);
+    alert("L'image a été envoyée avec succès !");
+    // Optionnel : réinitialiser le formulaire ou effectuer d'autres actions
+    Form.reset(); // Réinitialiser le formulaire
+    NvelleImg.style.display = "none"; // Masquer l'image
+  })
+  .catch((error) => {
+    
+    console.error("Erreur d'envoi :", error);
+    alert("Une erreur est survenue. Veuillez réessayer.");
+  })
+});
 
 
 
