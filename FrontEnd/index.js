@@ -134,18 +134,18 @@ BtnModif.addEventListener("click", () => {
 
 Btnexit.forEach(btn => {
   btn.addEventListener("click", () => {
-      Resetmodale ()
-      modale.style.display = "none"
-      overlay.style.display = "none"
-      modaleAjout.style.display = "none"
+      Resetmodale();
+      modale.style.display = "none";
+      overlay.style.display = "none";
+      modaleAjout.style.display = "none";
   })
 })
 
 overlay.addEventListener("click", () => {
-    Resetmodale ()
-    modale.style.display = "none"
-    overlay.style.display = "none"
-    modaleAjout.style.display = "none"
+    Resetmodale();
+    modale.style.display = "none";
+    overlay.style.display = "none";
+    modaleAjout.style.display = "none";
   })
 
 BtnAjout.addEventListener("click", () => {
@@ -154,10 +154,10 @@ BtnAjout.addEventListener("click", () => {
 })
 
 Btnfleche.addEventListener("click", () => {
-  Resetmodale ()
-  modale.style.display = "flex"
-  overlay.style.display = "block"
-  modaleAjout.style.display = "none"
+  Resetmodale();
+  modale.style.display = "flex";
+  overlay.style.display = "block";
+  modaleAjout.style.display = "none";
 })
   
 // Appel API pour la modale
@@ -235,10 +235,11 @@ const Labelfile = document.querySelector(".btn-photo");
 const Textfile = document.querySelector("p");
 const Inputfile = document.querySelector("#ajout-photo");
 const Maxsize = 4*1024*1024;
-let NvelleImg = document.getElementById("nouvelle-img")
-const Form = document.getElementById("form-photo")
-titreInput = document.getElementById("titre-form")
-categorieSelect = document.getElementById("categorie-form")
+let NvelleImg = document.getElementById("nouvelle-img");
+const Form = document.getElementById("form-photo");
+titreInput = document.getElementById("titre-form");
+categorieSelect = document.getElementById("categorie-form");
+Btnvalider = document.querySelector(".btn-valider");
 
 Inputfile.addEventListener( "change", (event) => {
   const file = event.target.files[0];
@@ -271,7 +272,28 @@ function Resetmodale () {
   Textfile.style.display = "flex";
 
   Inputfile.value = "";
+  titreInput.value = "";
+  categorieSelect.value = "";
 }
+
+function checkConditions() {
+  const file = Inputfile.files[0];
+  const titre = titreInput.value.trim();
+  const categorieName = categorieSelect.value;
+
+
+  if (file && titre && categorieName) {
+    Btnvalider.style.backgroundColor = "#1D6154"; 
+    
+  } else {
+    Btnvalider.style.backgroundColor = ""; 
+   }
+}
+
+Inputfile.addEventListener("change", checkConditions);
+titreInput.addEventListener("input", checkConditions);
+categorieSelect.addEventListener("change", checkConditions);
+
 
 Form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -326,3 +348,4 @@ fetch("http://localhost:5678/api/works", {
 getData();
 ProjetsMod();
 getCategories();
+checkConditions();
