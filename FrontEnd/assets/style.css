@@ -104,6 +104,10 @@ li:hover {
 	text-decoration: none;
 }
 
+.Btnlog:hover {
+	color: #B1663C;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;

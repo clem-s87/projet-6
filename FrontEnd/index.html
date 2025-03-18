@@ -36,27 +36,29 @@
 					<input type="file" id="ajout-photo" accept="image/png, image/gif, image/jpeg">
 				</label>
 				<p>jpg, png : 4 mo max</p>
-				<img src="" id="nouvelle-img" alt="Nouvelle photo">
+				<img src="#" id="nouvelle-img" alt="Nouvelle photo">
 			</div>
 			<div>
 				<form action="#" method="POST" id="form-photo">
-					<label for="titre-form">Titre <br><input type="text" id="titre-form" required></label>
-			</div>
-			<div>
-				<label for="categorie-form">Catégorie <br>
-					<select name="categorie-form" id="categorie-form" required>
-						<option value=""></option>
-						<option value="Objets"> Objets </option>
-						<option value="Appartements"> Appartements </option>
-						<option value="Hotels & restaurants"> Hotels & restaurants </option>
-					</select>
-				</label>
+					<div>
+						<label for="titre-form">Titre <br><input type="text" id="titre-form" required></label>
+					</div>
+					<div>
+						<label for="categorie-form">Catégorie <br>
+							<select name="categorie-form" id="categorie-form" required>
+								<option value="">Sélectionner une valeur</option>
+								<option value="Objets">Objets</option>
+								<option value="Appartements">Appartements</option>
+								<option value="Hotels & restaurants">Hotels & restaurants</option>
+							</select>
+						</label>
+					</div>
+					<div class="modale__ajout__footer">
+						<button type="submit" class="btn-valider">Valider</button>
+					</div>
+				</form> 
 			</div>
 		</div>
-			<div class="modale__ajout__footer">
-				<button type="submit" class="btn-valider">Valider</button>
-			</form>
-			</div>
 	</div>
 	<div class="admin-item edition-bar">
 		<i class="fa-regular fa-pen-to-square"></i>
@@ -68,7 +70,7 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<a href="./login.html" class="Btnlog"><li>login</li></a>
+			<li><a href="./login.html" class="Btnlog">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
